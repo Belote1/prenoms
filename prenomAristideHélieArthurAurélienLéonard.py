@@ -9,7 +9,7 @@ names = fichier.read()
 list_names = names.split("\n")
 
 #Input
-research = str(input("Un prenom stp"))
+research = str(input("Quel prénom recherchez-vous ?"))
 
 #Init de variables qui nous servent après
 people = 0
@@ -18,24 +18,26 @@ departements = []
 
 for i in range(len(list_names)): #Loop qui traite chaque ligne une par une
 
-    line = list.names[i].split(";") #Chaque ligne devient une liste
-
+    line = list_names[i].split(";") #Chaque ligne devient une liste
     if line[1] == research: #si c'est bien le prénom qu'on recherche...
         founded = True #on dit l'avoir trouver pour après arrêter le programme plus tôt et aller plus vite (optionnel)
         people = people + int(line[4])
-        departements.append(line[3]) #liste de départements qu'on utilisera + tard
+
+        for l in range(int(line[4])): #pour chaque personne...
+            departements.append(line[3]) #liste de départements qu'on utilisera + tard
 
     else:
         if founded:
             break #on arrête la boucle plus tôt pour économiser du temps
 
 #2nde init pour les départements
-departementsUtilises = []
+departementsUtilises = ["XX"] #XX revient tout le temps et fait buger le système, donc on le déclare comme déjà utilisé
 biggestDepartement = 0
 nbrBiggestDepartement = 0
 
 
 for i in range(len(departements)): #pour voir le meilleur département
+
 
     if departementsUtilises.count(departements[i]) == 0: #on passe que si on n'a jamais traité le département
         departementsUtilises.append(departements[i]) #on l'ajoute pour ne plus le refaire
@@ -44,12 +46,3 @@ for i in range(len(departements)): #pour voir le meilleur département
             biggestDepartement = departements[i]
 
 print("Il y a", people, "personnes qui sont nées avec le prénom", research, "depuis 1900. De plus, ils sont nés majoritairement dans le", biggestDepartement, "ème département de la France avec", nbrBiggestDepartement, "personne(s) ! ")
-
-
-
-
-
-
-
-
-
